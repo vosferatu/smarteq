@@ -31,3 +31,9 @@ The topic is OK. I suggest you that you **first research the genre detection and
 4. Each student should describe his next steps and how will he achieve the goals set at the beginning of the seminar.
 
 **Intermediate report should be submitted in the PDF format, in the following way: STUDENTID_NAME_SURNAME.pdf**
+
+### Dataset
+
+## Dataset
+
+We chose the [GITZAN](http://opihi.cs.uvic.ca/sound/genres.tar.gz) dataset because it is relatively small (~1 _gigabyte_) compared to others like *FMA* (Free Music Archive), *RWC Music Database* or *MSD* (Million Song Dataset) which have hundreds of \textit{gigabytes}. The dataset consists of *1000 audio tracks* each 30 seconds long. It has genres namely, blues, classical, country, disco, hiphop, jazz, reggae, rock, metal and pop with 100 songs per genre.
