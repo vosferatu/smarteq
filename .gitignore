@@ -1,6 +1,10 @@
 #Dataset
 genres/
 
+#Results
+src/img_data
+src/data.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -2,7 +2,6 @@ import librosa
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-get_ipython().magic('matplotlib inline')
 import os
 from PIL import Image
 import pathlib
@@ -40,8 +39,8 @@ plt.figure(figsize=(10,10))
 genres = 'blues classical country disco hiphop jazz metal pop reggae rock'.split()
 for g in genres:
     pathlib.Path(f'img_data/{g}').mkdir(parents=True, exist_ok=True)     
-    for filename in os.listdir(f'./MIR/genres/{g}'):
-        songname = f'./MIR/genres/{g}/{filename}'
+    for filename in os.listdir(f'../genres/{g}'):
+        songname = f'../genres/{g}/{filename}'
         y, sr = librosa.load(songname, mono=True, duration=5)
         plt.specgram(y, NFFT=2048, Fs=2, Fc=0, noverlap=128, cmap=cmap, sides='default', mode='default', scale='dB');
         plt.axis('off');
@@ -73,11 +72,11 @@ with file:
     writer.writerow(header)
 genres = 'blues classical country disco hiphop jazz metal pop reggae rock'.split()
 for g in genres:
-    for filename in os.listdir(f'./MIR/genres/{g}'):
-        songname = f'./MIR/genres/{g}/{filename}'
+    for filename in os.listdir(f'../genres/{g}'):
+        songname = f'../genres/{g}/{filename}'
         y, sr = librosa.load(songname, mono=True, duration=30)
         chroma_stft = librosa.feature.chroma_stft(y=y, sr=sr)
-        rmse = librosa.feature.rmse(y=y)
+        rmse = librosa.feature.rms(y=y)[0]
         spec_cent = librosa.feature.spectral_centroid(y=y, sr=sr)
         spec_bw = librosa.feature.spectral_bandwidth(y=y, sr=sr)
         rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)
@@ -135,13 +134,13 @@ model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+            loss='sparse_categorical_crossentropy',
+            metrics=['accuracy'])
 
 history = model.fit(X_train,
-                    y_train,
-                    epochs=20,
-                    batch_size=128)
+        y_train,
+        epochs=20,
+        batch_size=128)
 
 test_loss, test_acc = model.evaluate(X_test,y_test)
 
@@ -168,14 +167,14 @@ model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+            loss='sparse_categorical_crossentropy',
+            metrics=['accuracy'])
 
 model.fit(partial_x_train,
-          partial_y_train,
-          epochs=30,
-          batch_size=512,
-          validation_data=(x_val, y_val))
+        partial_y_train,
+        epochs=30,
+        batch_size=512,
+        validation_data=(x_val, y_val))
 results = model.evaluate(X_test, y_test)
 
 results
