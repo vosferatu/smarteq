@@ -183,7 +183,7 @@ results = model.evaluate(X_test, y_test)
 
 results
 
-model.save("model.h5")
+history.save("model.h5")
 print("Saved model to disk")
 
 filename = sys.argv[1]
