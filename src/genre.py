@@ -1,4 +1,3 @@
-from keras.models import load_model
 import numpy as np
 import pandas as pd
 import librosa
@@ -6,9 +5,9 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 import os
 import sys
+from keras.models import load_model
 
-CATEGORIES = ['Blues', 'Classical', 'Country', 'Disco',
-              'Hiphop', 'Jazz', 'Metal', 'Pop', 'Reggae', 'Rock']
+CATEGORIES = ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop', 'Jazz', 'Metal', 'Pop', 'Reggae', 'Rock']
 
 filename = sys.argv[1]
 y, sr = librosa.load(filename, mono=True, duration=30)

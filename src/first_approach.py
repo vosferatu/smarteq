@@ -1,6 +1,4 @@
 import sys
-from keras import layers
-from keras import models
 import librosa
 import pandas as pd
 import numpy as np
@@ -15,7 +13,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 # Keras
-import keras
+from keras import layers
+from keras import models
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -163,8 +162,7 @@ partial_y_train = y_train[200:]
 # Training: 20 epochs
 
 model = models.Sequential()
-model.add(layers.Dense(512, activation='relu',
-                       input_shape=(X_train.shape[1],)))
+model.add(layers.Dense(512, activation='relu', input_shape=(X_train.shape[1],)))
 model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(128, activation='relu'))
 model.add(layers.Dense(64, activation='relu'))
@@ -183,7 +181,7 @@ results = model.evaluate(X_test, y_test)
 
 results
 
-history.save("model.h5")
+model.save("model.h5")
 print("Saved model to disk")
 
 filename = sys.argv[1]
