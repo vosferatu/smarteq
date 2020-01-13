@@ -6,6 +6,8 @@ from scipy.signal import butter, lfilter
 import sys
 from playsound import playsound
 
+lowcut_frequencies = [20, 40, 80, 160, 300, 600, 1200, 2400, 5000, 10000]
+highcut_frequencies = [39, 79, 159, 299, 599, 1199, 2399, 4999, 9999, 10999]
 
 def bandpass_filter(data, lowcut, highcut, fs, order=5):
     nyq = 0.5 * fs
@@ -16,20 +18,12 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     return filtered
 
 
-def equalizer_10band(data, fs, gain1=0, gain2=0, gain3=0, gain4=0, gain5=0, gain6=0, gain7=0, gain8=0, gain9=0, gain10=0):
-    band1 = bandpass_filter(data, 20, 39, fs, order=2) * 10**(gain1/20)
-    band2 = bandpass_filter(data, 40, 79, fs, order=3) * 10**(gain2/20)
-    band3 = bandpass_filter(data, 80, 159, fs, order=3)*10**(gain3/20)
-    band4 = bandpass_filter(data, 160, 299, fs, order=3) * 10**(gain4/20)
-    band5 = bandpass_filter(data, 300, 599, fs, order=3) * 10**(gain5/20)
-    band6 = bandpass_filter(data, 600, 1199, fs, order=3) * 10**(gain6/20)
-    band7 = bandpass_filter(data, 1200, 2399, fs, order=3) * 10**(gain7/20)
-    band8 = bandpass_filter(data, 2400, 4999, fs, order=3) * 10**(gain8/20)
-    band9 = bandpass_filter(data, 5000, 9999, fs, order=3) * 10**(gain9/20)
-    band10 = bandpass_filter(data, 10000, 11000, fs, order=3) * 10**(gain10/20)
-    signal = band1 + band2 + band3 + band4 + \
-        band5 + band6 + band7 + band8 + band9 + band10
-    return signal
+def equalizer_10band(data, fs, gains):
+    signal = []
+    for i in range(len(gains)):
+        signal.append(bandpass_filter(data, lowcut_frequencies[i], highcut_frequencies[i], fs, order=3) * 10**(gains[i]/20))
+
+    return sum(signal)
 
 
 def category(cat, data, rate):
@@ -38,34 +32,34 @@ def category(cat, data, rate):
 
     if(cat == 'Hiphop'):
         equalized = equalizer_10band(
-            data, rate, -80, -80, -80, -84, -84, -90, -88, -88, -84, -84)
+            data, rate, [-80, -80, -80, -84, -84, -90, -88, -88, -84, -84])
     if(cat == 'Disco'):
         equalized = equalizer_10band(
-            data, rate, -78, -78, -78, -90, -90, -86, -94, -94, -88, -88)
+            data, rate, [-78, -78, -78, -90, -90, -86, -94, -94, -88, -88])
     if(cat == 'Classical'):
         equalized = equalizer_10band(
-            data, rate, -80, -80, -80, -84, -84, -94, -94, -82, -82, -82)
+            data, rate, [-80, -80, -80, -84, -84, -94, -94, -82, -82, -82])
     if(cat == 'Country'):
         equalized = equalizer_10band(
-            data, rate, -86, -86, -86, -90, -90, -90, -86, -86, -92, -92)
+            data, rate, [-86, -86, -86, -90, -90, -90, -86, -86, -92, -92])
     if(cat == 'Blues'):
         equalized = equalizer_10band(
-            data, rate, -82, -82, -82, -88, -88, -88, -78, -78, -78, -78)
+            data, rate, [-82, -82, -82, -88, -88, -88, -78, -78, -78, -78])
     if(cat == 'Jazz'):
         equalized = equalizer_10band(
-            data, rate, -82, -82, -82, -86, -86, -94, -86, -86, -80, -80)
+            data, rate, [-82, -82, -82, -86, -86, -94, -86, -86, -80, -80])
     if(cat == 'Metal'):
         equalized = equalizer_10band(
-            data, rate, -82, -82, -82, -88, -88, -80, -84, -84, -90, -90)
+            data, rate, [-82, -82, -82, -88, -88, -80, -84, -84, -90, -90])
     if(cat == 'Reggae'):
         equalized = equalizer_10band(
-            data, rate, -80, -80, -80, -78, -78, -94, -86, -86, -94, -94)
+            data, rate, [-80, -80, -80, -78, -78, -94, -86, -86, -94, -94])
     if(cat == 'Rock'):
         equalized = equalizer_10band(
-            data, rate, -82, -82, -82, -86, -86, -92, -86, -86, -82, -82)
+            data, rate, [-82, -82, -82, -86, -86, -92, -86, -86, -82, -82])
     if(cat == 'Pop'):
         equalized = equalizer_10band(
-            data, rate, -92, -92, -92, -86, -86, -80, -88, -88, -94, -94)
+            data, rate, [-92, -92, -92, -86, -86, -80, -88, -88, -94, -94])
 
     return equalized
 
