@@ -7,6 +7,7 @@ import os
 import sys
 import eq
 import keras
+from keras.models import load_model
 
 CATEGORIES = ['Blues', 'Classical', 'Country', 'Disco',
               'Hiphop', 'Jazz', 'Metal', 'Pop', 'Reggae', 'Rock']
@@ -24,7 +25,7 @@ to_append = f'{np.mean(chroma_stft)} {np.mean(rmse)} {np.mean(spec_cent)} {np.me
 for e in mfcc:
     to_append += f' {np.mean(e)}'
 
-model = keras.load_model('model.h5')
+model = load_model('model.h5')
 # summarize model.
 model.summary()
 
