@@ -9,6 +9,8 @@ import eq
 import keras
 from keras.models import load_model
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 CATEGORIES = ['Blues', 'Classical', 'Country', 'Disco',
               'Hiphop', 'Jazz', 'Metal', 'Pop', 'Reggae', 'Rock']
 
@@ -26,23 +28,24 @@ for e in mfcc:
     to_append += f' {np.mean(e)}'
 
 model = load_model('model.h5')
+
 # summarize model.
-model.summary()
+# model.summary()
 
 # evaluate loaded model on test data
 model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam', metrics=['accuracy'])
 
 X_new = np.fromstring(to_append, dtype=float, sep=' ')
-print(X_new)
 
+# print(X_new)
 
 ynew = model.predict(X_new.reshape(1, -1))
 
-print(ynew)
+# print(ynew)
 
 ynew = ynew.astype(int)
-print("X=%s, Predicted=%s" % (X_new, ynew))
+# print("X=%s, Predicted=%s" % (X_new, ynew))
 
 print(CATEGORIES[np.argmax(ynew)])
 

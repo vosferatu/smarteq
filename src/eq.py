@@ -81,4 +81,5 @@ def equalizer(file, cat):
     new_sound = category(cat, data, rate)
 
     wav.write("teste.wav", rate, new_sound)
+    print('Playing...')
     playsound('teste.wav')
