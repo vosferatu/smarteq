@@ -6,6 +6,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 import os
 import sys
+import eq
 
 CATEGORIES = ['Blues', 'Classical', 'Country', 'Disco',
               'Hiphop', 'Jazz', 'Metal', 'Pop', 'Reggae', 'Rock']
@@ -36,5 +37,12 @@ print(X_new)
 
 
 ynew = model.predict(X_new.reshape(1, -1))
-# show the inputs and predicted outputs
+
+print(ynew)
+
+ynew = ynew.astype(int)
 print("X=%s, Predicted=%s" % (X_new, ynew))
+
+print(CATEGORIES[np.argmax(ynew)])
+
+eq.equalizer(filename, CATEGORIES[np.argmax(ynew)])
