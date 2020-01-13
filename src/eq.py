@@ -63,6 +63,9 @@ def category(cat, data, rate):
     if(cat == 'Rock'):
         equalized = equalizer_10band(
             data, rate, -82, -82, -82, -86, -86, -92, -86, -86, -82, -82)
+    if(cat == 'Pop'):
+        equalized = equalizer_10band(
+            data, rate, -92, -92, -92, -86, -86, -80, -88, -88, -94, -94)
 
     return equalized
 
