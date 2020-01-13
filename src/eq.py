@@ -33,31 +33,31 @@ def category(cat, data, rate):
     if(cat == 'Hiphop'):
         equalized = equalizer_10band(
             data, rate, [-80, -80, -80, -84, -84, -90, -88, -88, -84, -84])
-    if(cat == 'Disco'):
+    elif(cat == 'Disco'):
         equalized = equalizer_10band(
             data, rate, [-78, -78, -78, -90, -90, -86, -94, -94, -88, -88])
-    if(cat == 'Classical'):
+    elif(cat == 'Classical'):
         equalized = equalizer_10band(
             data, rate, [-80, -80, -80, -84, -84, -94, -94, -82, -82, -82])
-    if(cat == 'Country'):
+    elif(cat == 'Country'):
         equalized = equalizer_10band(
             data, rate, [-86, -86, -86, -90, -90, -90, -86, -86, -92, -92])
-    if(cat == 'Blues'):
+    elif(cat == 'Blues'):
         equalized = equalizer_10band(
             data, rate, [-82, -82, -82, -88, -88, -88, -78, -78, -78, -78])
-    if(cat == 'Jazz'):
+    elif(cat == 'Jazz'):
         equalized = equalizer_10band(
             data, rate, [-82, -82, -82, -86, -86, -94, -86, -86, -80, -80])
-    if(cat == 'Metal'):
+    elif(cat == 'Metal'):
         equalized = equalizer_10band(
             data, rate, [-82, -82, -82, -88, -88, -80, -84, -84, -90, -90])
-    if(cat == 'Reggae'):
+    elif(cat == 'Reggae'):
         equalized = equalizer_10band(
             data, rate, [-80, -80, -80, -78, -78, -94, -86, -86, -94, -94])
-    if(cat == 'Rock'):
+    elif(cat == 'Rock'):
         equalized = equalizer_10band(
             data, rate, [-82, -82, -82, -86, -86, -92, -86, -86, -82, -82])
-    if(cat == 'Pop'):
+    elif(cat == 'Pop'):
         equalized = equalizer_10band(
             data, rate, [-92, -92, -92, -86, -86, -80, -88, -88, -94, -94])
 
