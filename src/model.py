@@ -74,14 +74,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 
 model = models.Sequential()
-model.add(layers.Dense(10, activation='relu',
+model.add(layers.Dense(32, activation='relu',
                        input_shape=(X_train.shape[1],)))
 
-model.add(layers.Dense(6, activation='relu'))
+model.add(layers.Dense(24, activation='relu'))
 
-model.add(layers.Dense(4, activation='relu'))
+model.add(layers.Dense(16, activation='relu'))
 
-model.add(layers.Dense(1, activation='softmax'))
+model.add(layers.Dense(10, activation='softmax'))
 
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
@@ -109,12 +109,12 @@ partial_y_train = y_train[200:]
 # training
 
 model = models.Sequential()
-model.add(layers.Dense(10, activation='relu',
+model.add(layers.Dense(64, activation='relu',
                        input_shape=(X_train.shape[1],)))
-model.add(layers.Dense(8, activation='relu'))
-model.add(layers.Dense(6, activation='relu'))
-model.add(layers.Dense(4, activation='relu'))
-model.add(layers.Dense(1, activation='softmax'))
+model.add(layers.Dense(32, activation='relu'))
+model.add(layers.Dense(24, activation='relu'))
+model.add(layers.Dense(16, activation='relu'))
+model.add(layers.Dense(10, activation='softmax'))
 
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
@@ -128,7 +128,8 @@ model.fit(partial_x_train,
 results = model.evaluate(X_test, y_test)
 
 # model.save("model.h5")
-print("Saved model to disk")
+# print("Saved model to disk")
+
 
 filename = sys.argv[1]
 y, sr = librosa.load(filename, mono=True, duration=30)
