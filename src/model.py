@@ -74,14 +74,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
 
 model = models.Sequential()
-model.add(layers.Dense(256, activation='relu',
+model.add(layers.Dense(10, activation='relu',
                        input_shape=(X_train.shape[1],)))
 
-model.add(layers.Dense(128, activation='relu'))
+model.add(layers.Dense(6, activation='relu'))
 
-model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(4, activation='relu'))
 
-model.add(layers.Dense(10, activation='softmax'))
+model.add(layers.Dense(1, activation='softmax'))
 
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
@@ -89,16 +89,16 @@ model.compile(optimizer='adam',
 
 history = model.fit(X_train,
                     y_train,
-                    epochs=20,
+                    epochs=100,
                     batch_size=128)
 
 test_loss, test_acc = model.evaluate(X_test, y_test)
 
-# model.save('model1.h5')
+model.save('model.h5')
 
 print('test_acc: ', test_acc)
 
-# validatiion
+# validation
 
 x_val = X_train[:200]
 partial_x_train = X_train[200:]
@@ -109,12 +109,12 @@ partial_y_train = y_train[200:]
 # training
 
 model = models.Sequential()
-model.add(layers.Dense(512, activation='relu',
+model.add(layers.Dense(10, activation='relu',
                        input_shape=(X_train.shape[1],)))
-model.add(layers.Dense(256, activation='relu'))
-model.add(layers.Dense(128, activation='relu'))
-model.add(layers.Dense(64, activation='relu'))
-model.add(layers.Dense(10, activation='softmax'))
+model.add(layers.Dense(8, activation='relu'))
+model.add(layers.Dense(6, activation='relu'))
+model.add(layers.Dense(4, activation='relu'))
+model.add(layers.Dense(1, activation='softmax'))
 
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
@@ -122,7 +122,7 @@ model.compile(optimizer='adam',
 
 model.fit(partial_x_train,
           partial_y_train,
-          epochs=30,
+          epochs=100,
           batch_size=512,
           validation_data=(x_val, y_val))
 results = model.evaluate(X_test, y_test)
